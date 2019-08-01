@@ -1,4 +1,5 @@
 
+
 const Discord = require('discord.js');
 const bot = new Discord.Client();
 require('dotenv').config();
@@ -6,35 +7,76 @@ require('dotenv').config();
 var msg;
 var msgL;
 var oL=2;
-var reply = "N";
+var reply;
+var reply = "";
+var wL;
+var noot = 0;
 
-bot.on('message', (message)=> 
+function checkNoot(word)
 {
-    msg = message.content.toLowerCase();
-    msgL = msg.length;
-
-    if(msg.charAt(0)=="n" && msg.charAt(1)=="o" & msg.charAt(2)=="o" && msg.charAt(msgL-1)=="t")
+    wL=word.length
+    oL=2;
+    if(word.charAt(0)=="n" && word.charAt(1)=="o" & word.charAt(2)=="o" && word.charAt(wL-1)=="t")
     {
         console.log("is noot, check")
 
-        while(msg.charAt(oL)=="o")
+        noot = 1;
+
+        while(word.charAt(oL)=="o")
         {
             oL++;
         }
         
         console.log("ooo lenght= "+oL);
+        
 
-        reply = reply.concat("O".repeat(oL-1)).concat("T")
+        reply = reply.concat("N".concat("O".repeat(oL-1)).concat("T").concat(" "));
 
-        message.channel.sendMessage("**"+reply+"**");
+        console.log("curr reply ="+reply+"\n");
 
-        oL = 2;
-        reply ="N";
+        //message.channel.sendMessage("**"+reply+"**");
+
+        //oL = 2;
+        //reply ="N";
+    }
+}
 
 
+function stringSplit(string)
+{
+    var split = string.split(" ");
+
+    for(wI=0;wI<split.length;wI++)
+    {
+        console.log(split[wI]+" "+wI+"\n");
+    
+        var word=split[wI].toLowerCase();
+
+        checkNoot(word);
+    }
+
+
+}
+
+bot.on('message', (message)=> 
+{
+    if(!message.author.bot)
+    {
+        msg = message.content.toLowerCase();
+        //msgL = msg.length;
+        stringSplit(msg)
+
+        if(noot==1)
+        {
+
+            noot=0;
+            message.channel.send("**"+reply+"**");
+            reply="";
+        }
     }
 
 });
 
 bot.login(process.env.token);
+//console.log(process.env.token);
 console.log("check");
