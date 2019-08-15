@@ -4,6 +4,9 @@ const Discord = require('discord.js');
 const bot = new Discord.Client();
 require('dotenv').config();
 
+const DBL = require("dblapi.js");
+const dbl = new DBL('process.env.token', bot);
+
 var msg;
 var msgL;
 var oL=2;
