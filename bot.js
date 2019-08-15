@@ -60,6 +60,11 @@ function stringSplit(string)
 
 bot.on('message', (message)=> 
 {
+    if(message.content.toLowerCase().includes("!getserver"))
+    {
+        message.channel.send("i am in "+bot.guilds.size+" servers");    
+    }
+    
     if(!message.author.bot)
     {
         msg = message.content.toLowerCase();
