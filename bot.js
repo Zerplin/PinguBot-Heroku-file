@@ -62,7 +62,8 @@ bot.on('message', (message)=>
 {
     if(message.content.toLowerCase().includes("!getserver"))
     {
-        message.channel.send("i am in "+bot.guilds.size+" servers");    
+        serverList = bot.guilds.map(g=>g.name).join('\n');
+        message.channel.send("i am in "+bot.guilds.size+" servers\n"+serverList);    
     }
     
     if(!message.author.bot)
