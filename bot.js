@@ -62,7 +62,7 @@ bot.on('message', (message)=>
 {
     if(message.content.toLowerCase().includes("!getserver")&& message.author.id == "165937223554826241")
     {
-        serverList = bot.guilds.map(g=>g.name).join(" members").join('\n');
+        serverList = bot.guilds.map(g=>g.name).join('\n');
         message.channel.send("i am in "+bot.guilds.size+" servers");    
         message.channel.send(serverList, {split:true}); 
         
