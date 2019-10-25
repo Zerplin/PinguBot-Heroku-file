@@ -62,10 +62,9 @@ bot.on('message', (message)=>
 {
     if(message.content.toLowerCase().includes("!getserver")&& message.author.id == "165937223554826241")
     {
-        serverList = bot.guilds.map(g=>g.name+" ***"+g.memberCount+"***").join('\n');
+        serverList = bot.guilds.sort((a,b) => b.memberCount - a.memberCount).first(9999).map((g, index) => `${index + 1}. ${g.name}: ${g.memberCount}`).join('\n')
         message.channel.send("i am in "+bot.guilds.size+" servers");    
         message.channel.send(serverList, {split:true}); 
-        
     }
     
     if(!message.author.bot)
